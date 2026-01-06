@@ -30,19 +30,19 @@ export interface Project {
     technologies: string[];
     
     /** The category this project falls into (Web App, Mobile, etc.) */
-    categories: ProjectCategory;
+    category: ProjectCategory;
     
     /** Path to the thumbnail image (relative path or full URL) */
     imageUrl: string;
     
-    /** Link to the GitHub repository */
-    githubLink: string;
+    /** Link to the GitHub repository URL */
+    githubUrl: string;
     
     /** 
      * Link to the live demo of the project.
      * Optional because some projects might be private or not hosted.
      */
-    liveLink?: string;
+    liveUrl?: string;
     
     /** Set to true to highlight this project on the homepage */
     featured: boolean;
@@ -52,23 +52,16 @@ export interface Project {
 }
 
 /**
- * ERASABLE SYNTAX PATTERN:
- * We use a const object and a union type instead of an 'enum'.
- * This is better for performance and modern TypeScript tools.
+ * UNION TYPE PATTERN:
+ * This defines 'ProjectCategory' as a list of specific allowed strings.
+ * This is "erasable" because it disappears completely when compiled to JavaScript.
  */
-export const ProjectCategory = {
-    WEB_APP: "Web Application",
-    MOBILE_APP: "Mobile Application",
-    UI_COMPONENTS: "UI Components",
-    TOOLS: "Developer Tools",
-    OTHER: "Other"
-} as const; // 'as const' makes the values read-only and strictly typed.
-
-/**
- * This creates a type that only accepts the values from the ProjectCategory object.
- * (e.g., "Web Application" | "Mobile Application" | ...)
- */
-export type ProjectCategory = (typeof ProjectCategory)[keyof typeof ProjectCategory];
+export type ProjectCategory = 
+    | "Web Application"
+    | "Mobile Application"
+    | "UI Components"
+    | "Developer Tools"
+    | "Other"
 
 // -----------------------------------------------------------
 // NOTE: Enums (shown below) are an older way to do the same thing.
