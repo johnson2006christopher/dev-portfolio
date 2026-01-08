@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { mockProjects } from '../data/mockData';
-import ProjectCard from '../components/ProjectCard';
+import {ProjectCard} from '../components/ProjectCard';
 
 function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
